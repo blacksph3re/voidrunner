@@ -1,0 +1,43 @@
+#ifndef COLLISIONOBJECT_HPP_INCLUDED
+#define COLLISIONOBJECT_HPP_INCLUDED
+
+#include <SFML/Graphics.hpp>
+#include "Definitions.hpp"
+
+class CollisionObject : public sf::Sprite
+{
+protected:
+    sf::Vector2f    m_movement;
+    sf::FloatRect   m_boundingBox;
+    float           m_mass;
+
+    enum Shapes
+    {
+        CIRCLE,
+        SIMPLE_RECT,
+        COMPLEX_RECT,
+        NONE
+    };
+
+public:
+    /**
+     * Returns the shape type that best approximizes the shape of the object
+     * The corresponding getXBounds function should be overloaded
+    */
+    virtual Shapes getShape() = 0;
+
+    /**
+     * Gets the bounds of the object that shall be used for collision detection
+     * In global coordinates
+     * Must not exceed limits of getBoundingBox
+    */
+    virtual sf::RectangleShape  getComplexRectBounds() const;
+    virtual sf::FloatRect       getSimpleRectBounds() const;
+    virtual Circle<float>       getCircleBounds() const;
+
+    inline const sf::FloatRect& getBoundingBox() const {return m_boundingBox;}
+
+    virtual ~CollisionObject() {}
+};
+
+#endif // COLLISIONOBJECT_HPP_INCLUDED
