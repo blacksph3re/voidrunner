@@ -9,21 +9,23 @@ class CollisionObject : public sf::Sprite
 protected:
     sf::Vector2f    m_movement;
     sf::FloatRect   m_boundingBox;
-    float           m_mass;
-
-    enum Shapes
-    {
-        CIRCLE,
-        SIMPLE_RECT,
-        COMPLEX_RECT,
-        NONE
-    };
-
+    float           m_mass;         // Mass must not be 0
 public:
+
+    const sf::Vector2f& getMovement() const {return m_movement;}
+    void                setMovement(sf::Vector2f val) {m_movement = val;}
+    float               getMass() const {return m_mass;}
+
     /**
      * Returns the shape type that best approximizes the shape of the object
      * The corresponding getXBounds function should be overloaded
     */
+    enum Shapes
+    {
+        CIRCLE,
+        SIMPLE_RECT,
+        COMPLEX_RECT
+    };
     virtual Shapes getShape() = 0;
 
     /**
