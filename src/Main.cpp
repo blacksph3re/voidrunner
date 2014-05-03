@@ -19,13 +19,17 @@ Main::~Main()
 void Main::run()
 {
     if(init() != 0)
+    {
+        std::cout << "Init failed" << std::endl;
         return;
+    }
 
     m_running = true;
     float frameTime = 0.0f;
+    sf::Clock clock;
     while(m_running && m_screen.isOpen())
     {
-        sf::Clock clock;
+        clock.restart();
         sf::Event event;
         while (m_screen.pollEvent(event))
         {
@@ -34,8 +38,9 @@ void Main::run()
                 m_screen.close();
         }
 
-        update(frameTime);
         render();
+        update(frameTime);
+
         frameTime = clock.getElapsedTime().asSeconds();
     }
 
@@ -46,10 +51,7 @@ int Main::init()
 {
     int retval = 0;
     retval += ConstantManager::get().init();
-    retval += m_colManager.init(sf::FloatRect(std::stof(getConstant("SystemSizeX")) * -0.5f,
-                                              std::stof(getConstant("SystemSizeY")) * -0.5f,
-                                              std::stof(getConstant("SystemSizeX")),
-                                              std::stof(getConstant("SystemSizeY"))));
+    retval += m_space.init();
 
     m_screen.create(sf::VideoMode(800, 600), "Voidrunner");
 
@@ -58,18 +60,18 @@ int Main::init()
 
 void Main::exit()
 {
+    m_space.exit();
 }
 
 void Main::update(float fTime)
 {
-    m_colManager.update(fTime);
+    m_space.update(fTime);
 }
 
 void Main::render()
 {
     m_screen.clear();
-
-
+    m_space.render(m_screen);
     m_screen.display();
 }
 

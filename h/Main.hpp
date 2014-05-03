@@ -2,14 +2,14 @@
 #define MAIN_HPP_INCLUDED
 
 #include <SFML/Graphics.hpp>
-#include "../h/CollisionManager.hpp"
+#include "Space.hpp"
 
 class Main
 {
 private:
     sf::RenderWindow    m_screen;
     bool                m_running;
-    CollisionManager    m_colManager;
+    Space               m_space;
 
     int init();
     void update(float fTime);

@@ -94,14 +94,15 @@ int CollisionManager::init(sf::FloatRect bounds)
     sf::Vector2f sectorSize(m_bounds.width / static_cast<float>(xResolution),
                             m_bounds.height / static_cast<float>(yResolution));
     m_sectors.clear();
+    m_objects.clear();
     m_sectors.reserve(xResolution);
     for(int x=0; x!=xResolution; x++)
     {
         m_sectors.emplace_back();
         for(int y=0; y!=yResolution; y++)
         {
-            m_sectors[x].emplace_back(sf::FloatRect(sf::Vector2f(sectorSize.x * static_cast<float>(x), sectorSize.y * static_cast<float>(y)),
-                                                    sf::Vector2f(sectorSize.x * static_cast<float>(x+1), sectorSize.y * static_cast<float>(y+1))));
+            m_sectors.back().emplace_back(sf::FloatRect(sf::Vector2f(sectorSize.x * static_cast<float>(x), sectorSize.y * static_cast<float>(y)),
+                                                        sf::Vector2f(sectorSize.x * static_cast<float>(x+1), sectorSize.y * static_cast<float>(y+1))));
         }
     }
 

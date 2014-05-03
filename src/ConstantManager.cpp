@@ -20,12 +20,17 @@ void ConstantManager::setDefaults()
 
     m_constants["SystemSizeX"] = "2000";
     m_constants["SystemSizeY"] = "2000";
-    m_constants["GalaxySizeX"] = "5";
-    m_constants["GalaxySizeY"] = "5";
+    m_constants["SystemCountX"] = "5";
+    m_constants["SystemCountY"] = "5";
+    m_constants["DefaultSystemX"] = "2";
+    m_constants["DefaultSystemY"] = "2";
+
+    m_constants["InactiveSystemUpdateDelay"] = "1";
 }
 
 int ConstantManager::init()
 {
+    // TODO: Load constants from file
     return 0;
 }
 

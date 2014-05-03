@@ -32,6 +32,7 @@ public:
      * Gets the bounds of the object that shall be used for collision detection
      * In global coordinates
      * Must not exceed limits of getBoundingBox
+     * Standart-implementations are given, but it is recommendet to rewrite them to your need
     */
     virtual sf::RectangleShape  getComplexRectBounds() const;
     virtual sf::FloatRect       getSimpleRectBounds() const;
