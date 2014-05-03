@@ -27,14 +27,16 @@ void ConstantManager::setDefaults()
     m_constants["SystemCountY"] = "5";
     m_constants["DefaultSystemX"] = "2";
     m_constants["DefaultSystemY"] = "2";
-    m_constants["InactiveSystemUpdateDelay"] = "1";
+    m_constants["InactiveSystemUpdateDelay"] = "10";
 
     // General
     m_constants["ImageFolder"] = "res/";
 
     // Asteroid
-    m_constants["AsteroidMinScale"] = "0.01";
-    m_constants["AsteroidMaxScale"] = "0.03";
+    m_constants["AsteroidMinScale"] = "0.02";
+    m_constants["AsteroidMaxScale"] = "0.1";
+    m_constants["AsteroidMaxSpeed"] = "600";
+    m_constants["AsteroidCount"] = "100";
 }
 
 int ConstantManager::init()

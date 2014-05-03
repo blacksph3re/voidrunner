@@ -47,6 +47,7 @@ private:
 public:
 
     void removeObject(CollisionObject* object);
+    void addObject(CollisionObject* object);
 
     void refresh();
     void checkCollisions(float fTime);

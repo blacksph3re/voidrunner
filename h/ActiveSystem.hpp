@@ -9,10 +9,10 @@
 class ActiveSystem
 {
 private:
-    CollisionManager    m_colMgr;
+    CollisionManager    m_collisionMgr;
     sf::FloatRect       m_borders;
     std::list<Asteroid> m_asteroids;
-    int                 m_minAsteroidCount;
+    unsigned int        m_minAsteroidCount;
 
 
 public:

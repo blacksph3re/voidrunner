@@ -1,5 +1,6 @@
 #include "../h/CollisionManager.hpp"
 #include "../h/ConstantManager.hpp"
+#include <iostream>
 
 void CollisionManager::Sector::checkCollisions(float fTime)
 {
@@ -90,9 +91,9 @@ int CollisionManager::init(sf::FloatRect bounds)
 {
     int xResolution = std::stoi(getConstant("CollisionGridResolutionX"));
     int yResolution = std::stoi(getConstant("CollisionGridResolutionY"));
+    m_bounds = bounds;
     m_resetDelay = static_cast<std::uint8_t>(std::stoi(getConstant("CollisionGridResetDelay")));
-    sf::Vector2f sectorSize(m_bounds.width / static_cast<float>(xResolution),
-                            m_bounds.height / static_cast<float>(yResolution));
+    sf::Vector2f sectorSize(m_bounds.width / static_cast<float>(xResolution), m_bounds.height / static_cast<float>(yResolution));
     m_sectors.clear();
     m_objects.clear();
     m_sectors.reserve(xResolution);
@@ -138,6 +139,12 @@ void CollisionManager::renderGrid(sf::RenderTarget &screen)
 {
 }
 
+void CollisionManager::addObject(CollisionObject* object)
+{
+    m_objects.push_back(object);
+    m_updateStatus = 0;
+}
+
 void CollisionManager::removeObject(CollisionObject* object)
 {
     m_objects.remove(object);
@@ -148,6 +155,7 @@ void CollisionManager::removeObject(CollisionObject* object)
             y.removeObject(object);
         }
     }
+    m_updateStatus = 0;
 }
 
 void CollisionManager::checkCollisions(float fTime)
@@ -171,7 +179,9 @@ void CollisionManager::refresh()
             for(auto obj : m_objects)
             {
                 if(y.getBounds().intersects(obj->getBoundingBox()))
+                {
                     y.addObject(obj);
+                }
             }
         }
     }
