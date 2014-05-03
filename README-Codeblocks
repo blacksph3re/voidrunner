@@ -1,0 +1,6 @@
+Schritte, um das Ganze unter Codeblocks zum Laufen zu bekommen (nicht getestet)
+
+1. Neues Projekt erstellen. Wenn das Projekt in diesem Ordner erstellt werden soll, .gitignore entsprechend anpassen, dass keine Projektdateien hochgeladen werden
+2. Die Dateien mit Project->Add Files hinzufügen
+3. Unter Project->Build Options->Compiler Settings->Compiler Flags C++11 aktivieren
+4. Wenn das Projekt außerhalb dieses Ordners erstellt wurde, unter Project->Properties->Build Targets die Execution Working Dir auf diesen Ordner setzen

@@ -14,18 +14,27 @@ std::string getConstant(std::string key)
 void ConstantManager::setDefaults()
 {
     m_constants.clear();
+
+    // Collision-Manager
     m_constants["CollisionGridResolutionX"] = "3";
     m_constants["CollisionGridResolutionY"] = "3";
     m_constants["CollisionGridResetDelay"] = "2";
 
+    // Space
     m_constants["SystemSizeX"] = "2000";
     m_constants["SystemSizeY"] = "2000";
     m_constants["SystemCountX"] = "5";
     m_constants["SystemCountY"] = "5";
     m_constants["DefaultSystemX"] = "2";
     m_constants["DefaultSystemY"] = "2";
-
     m_constants["InactiveSystemUpdateDelay"] = "1";
+
+    // General
+    m_constants["ImageFolder"] = "res/";
+
+    // Asteroid
+    m_constants["AsteroidMinScale"] = "0.01";
+    m_constants["AsteroidMaxScale"] = "0.03";
 }
 
 int ConstantManager::init()

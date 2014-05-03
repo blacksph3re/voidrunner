@@ -11,6 +11,8 @@ int ActiveSystem::init(const InactiveSystem& data)
     if(m_colMgr.init(m_borders) != 0)
         return 1;
 
+
+
     return 0;
 }
 

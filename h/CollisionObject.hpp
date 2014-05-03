@@ -8,13 +8,13 @@ class CollisionObject : public sf::Sprite
 {
 protected:
     sf::Vector2f    m_movement;
-    sf::FloatRect   m_boundingBox;
     float           m_mass;         // Mass must not be 0
 public:
 
     const sf::Vector2f& getMovement() const {return m_movement;}
     void                setMovement(sf::Vector2f val) {m_movement = val;}
     float               getMass() const {return m_mass;}
+    void                setMass(float val) {m_mass = val;}
 
     /**
      * Returns the shape type that best approximizes the shape of the object
@@ -38,8 +38,9 @@ public:
     virtual sf::FloatRect       getSimpleRectBounds() const;
     virtual Circle<float>       getCircleBounds() const;
 
-    inline const sf::FloatRect& getBoundingBox() const {return m_boundingBox;}
+    virtual sf::FloatRect getBoundingBox() const = 0;
 
+    CollisionObject() : m_movement(sf::Vector2f(0, 0)), m_mass(1) {}
     virtual ~CollisionObject() {}
 };
 

@@ -1,10 +1,14 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 #include "../h/Main.hpp"
 #include "../h/ConstantManager.hpp"
+#include "../h/ResourceManager.hpp"
 
 int main()
 {
+    srand (static_cast <unsigned> (time(0)));
     Main m;
     m.run();
     return 0;
@@ -20,7 +24,7 @@ void Main::run()
 {
     if(init() != 0)
     {
-        std::cout << "Init failed" << std::endl;
+        std::cerr << "Init failed" << std::endl;
         return;
     }
 
@@ -49,18 +53,29 @@ void Main::run()
 
 int Main::init()
 {
-    int retval = 0;
-    retval += ConstantManager::get().init();
+    int retval;
+
+    retval = ResourceManager::get().init();
+    if(retval != 0)
+        return retval;
+
+    retval = ConstantManager::get().init();
+    if(retval != 0)
+        return retval;
+
     retval += m_space.init();
+    if(retval != 0)
+        return retval;
 
     m_screen.create(sf::VideoMode(800, 600), "Voidrunner");
 
-    return retval;
+    return 0;
 }
 
 void Main::exit()
 {
     m_space.exit();
+    ResourceManager::get().exit();
 }
 
 void Main::update(float fTime)
