@@ -1,4 +1,5 @@
 #include "../h/CollisionManager.hpp"
+#include "../h/ConstantManager.hpp"
 
 void CollisionManager::Sector::checkCollisions(float fTime)
 {
@@ -85,9 +86,11 @@ void CollisionManager::Sector::applyCircleCircle(CollisionObject* a, CollisionOb
     b->move(movB * fTime);
 }
 
-CollisionManager::CollisionManager(sf::FloatRect bounds)
-: m_bounds(bounds), m_updateStatus(0)
+int CollisionManager::init(sf::FloatRect bounds)
 {
+    int xResolution = std::stoi(getConstant("CollisionGridResolutionX"));
+    int yResolution = std::stoi(getConstant("CollisionGridResolutionY"));
+    m_resetDelay = static_cast<std::uint8_t>(std::stoi(getConstant("CollisionGridResetDelay")));
     sf::Vector2f sectorSize(m_bounds.width / static_cast<float>(xResolution),
                             m_bounds.height / static_cast<float>(yResolution));
     m_sectors.clear();
@@ -101,15 +104,24 @@ CollisionManager::CollisionManager(sf::FloatRect bounds)
                                                     sf::Vector2f(sectorSize.x * static_cast<float>(x+1), sectorSize.y * static_cast<float>(y+1))));
         }
     }
+
+    m_updateStatus = 0;
+
+    return 0;
 }
 
+void CollisionManager::exit()
+{
+    m_sectors.clear();
+    m_objects.clear();
+}
 
 void CollisionManager::update(float fTime)
 {
     if(m_updateStatus == 0)
     {
         refresh();
-        m_updateStatus = resetDelay;
+        m_updateStatus = m_resetDelay;
     }
     else
         m_updateStatus--;

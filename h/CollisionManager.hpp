@@ -21,8 +21,8 @@ private:
         void applyCollision(CollisionObject* a, CollisionObject* b, float fTime);
 
         void applyCircleCircle(CollisionObject* a, CollisionObject* b, float fTime);
-        void applyRectCircle(CollisionObject* a, CollisionObject* b, float fTime);
-        void applyRectRect(CollisionObject* a, CollisionObject* b, float fTime);
+        void applyRectCircle(CollisionObject* a, CollisionObject* b, float fTime);  // Not implemented yet
+        void applyRectRect(CollisionObject* a, CollisionObject* b, float fTime);  // Not implemented yet
 
     public:
         const sf::FloatRect& getBounds() const {return m_bounds;}
@@ -37,9 +37,7 @@ private:
         ~Sector() {}
     };
 
-    static const int xResolution = 3;
-    static const int yResolution = 3;
-    static const std::uint8_t resetDelay = 2; // Wait 2 Frames until next full grid reset
+    std::uint8_t                        m_resetDelay ; // Wait n Frames until next full grid reset
 
     std::vector<std::vector<Sector>>    m_sectors;
     std::list<CollisionObject*>         m_objects;
@@ -53,11 +51,13 @@ public:
     void refresh();
     void checkCollisions(float fTime);
 
+    int init(sf::FloatRect bounds);
     void update(float fTime);
     void renderBounds(sf::RenderTarget &screen);
     void renderGrid(sf::RenderTarget &screen);
+    void exit();
 
-    CollisionManager(sf::FloatRect bounds);
+    CollisionManager() {}
     ~CollisionManager() {}
 };
 
