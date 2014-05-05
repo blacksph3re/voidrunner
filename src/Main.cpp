@@ -68,7 +68,7 @@ int Main::init()
         return retval;
 
     m_screen.create(sf::VideoMode(800, 600), "Voidrunner");
-
+    m_screen.setView(sf::View(sf::FloatRect(-1200, -1200, 2400, 2400)));
     return 0;
 }
 

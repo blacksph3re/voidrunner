@@ -11,6 +11,7 @@ int Asteroid::init(sf::Vector2f position)
     float minScale = std::stof(getConstant("AsteroidMinScale"));
     float scale = minScale + static_cast<float>(rand())/(static_cast<float>(RAND_MAX/(maxScale-minScale)));
     setScale(scale, scale);
+    setMass(scale * 1000);
     setOrigin(getLocalBounds().width * 0.5f, getLocalBounds().height * 0.5f);
     m_rotation = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/180.0f));
     return 0;

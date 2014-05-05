@@ -15,21 +15,22 @@ private:
     class Sector
     {
     private:
-        std::list<CollisionObject*> m_objects;
+        std::list<CollisionObject*> m_localObjects;
         sf::FloatRect               m_bounds;
 
         void applyCollision(CollisionObject* a, CollisionObject* b, float fTime);
 
-        void applyCircleCircle(CollisionObject* a, CollisionObject* b, float fTime);
+        void applyCircleCircle(CollisionObject* a, CollisionObject* b);
         void applyRectCircle(CollisionObject* a, CollisionObject* b, float fTime);  // Not implemented yet
         void applyRectRect(CollisionObject* a, CollisionObject* b, float fTime);  // Not implemented yet
 
     public:
         const sf::FloatRect& getBounds() const {return m_bounds;}
+        const std::list<CollisionObject*>& getObjects() const {return m_localObjects;}
 
-        void reset() {m_objects.clear();}
-        void addObject(CollisionObject* object) {m_objects.push_back(object);}
-        void removeObject(CollisionObject* object) {m_objects.remove(object);}
+        void reset() {m_localObjects.clear();}
+        void addObject(CollisionObject* object) {m_localObjects.push_back(object);}
+        void removeObject(CollisionObject* object) {m_localObjects.remove(object);}
 
         void checkCollisions(float fTime);
 
@@ -39,7 +40,7 @@ private:
 
     std::uint8_t                        m_resetDelay ; // Wait n Frames until next full grid reset
 
-    std::vector<std::vector<Sector>>    m_sectors;
+    std::vector<Sector>                 m_sectors;
     std::list<CollisionObject*>         m_objects;
     sf::FloatRect                       m_bounds;
     std::uint8_t                        m_updateStatus; // 0 - Update, everything else - frames to next update
@@ -48,6 +49,7 @@ public:
 
     void removeObject(CollisionObject* object);
     void addObject(CollisionObject* object);
+    int test();
 
     void refresh();
     void checkCollisions(float fTime);

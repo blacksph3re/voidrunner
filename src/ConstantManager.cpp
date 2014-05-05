@@ -33,9 +33,9 @@ void ConstantManager::setDefaults()
     m_constants["ImageFolder"] = "res/";
 
     // Asteroid
-    m_constants["AsteroidMinScale"] = "0.02";
-    m_constants["AsteroidMaxScale"] = "0.1";
-    m_constants["AsteroidMaxSpeed"] = "600";
+    m_constants["AsteroidMinScale"] = "0.005";
+    m_constants["AsteroidMaxScale"] = "0.07";
+    m_constants["AsteroidMaxSpeed"] = "500";
     m_constants["AsteroidCount"] = "100";
 }
 

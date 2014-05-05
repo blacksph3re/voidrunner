@@ -4,11 +4,11 @@
 
 void CollisionManager::Sector::checkCollisions(float fTime)
 {
-    for(std::list<CollisionObject*>::iterator i = m_objects.begin(); i != m_objects.end(); ++i)
+    for(std::list<CollisionObject*>::iterator i = m_localObjects.begin(); i != m_localObjects.end(); ++i)
     {
         std::list<CollisionObject*>::iterator j = i;
         j++;
-        for(; j != m_objects.end(); j++)
+        for(; j != m_localObjects.end(); j++)
         {
             if((*i)->getBoundingBox().intersects((*j)->getBoundingBox()))
             {
@@ -23,7 +23,7 @@ void CollisionManager::Sector::applyCollision(CollisionObject* a, CollisionObjec
     if(a->getShape() == CollisionObject::Shapes::CIRCLE)
     {
         if(b->getShape() == CollisionObject::Shapes::CIRCLE)
-            applyCircleCircle(a, b, fTime);
+            applyCircleCircle(a, b);
 
         else if(b->getShape() == CollisionObject::Shapes::COMPLEX_RECT)
         {}
@@ -53,15 +53,17 @@ void CollisionManager::Sector::applyRectCircle(CollisionObject* a, CollisionObje
 {
 }
 
-void CollisionManager::Sector::applyCircleCircle(CollisionObject* a, CollisionObject* b, float fTime)
+void CollisionManager::Sector::applyCircleCircle(CollisionObject* a, CollisionObject* b)
 {
-
     Circle<float> boundA = a->getCircleBounds(), boundB = b->getCircleBounds();
     sf::Vector2f movA = a->getMovement(), movB = b->getMovement();
 
     sf::Vector2f difA = boundA.getPosition() - boundB.getPosition();
     sf::Vector2f difB = boundB.getPosition() - boundA.getPosition();
-    if(difA.x * difA.x + difA.y * difA.y > boundA.getRadius() + boundB.getRadius())  // No Collision
+    if(difA.x * difA.x + difA.y * difA.y > (boundA.getRadius() + boundB.getRadius()) * (boundA.getRadius() + boundB.getRadius()))  // No Collision
+        return;
+    sf::Vector2f newdifA = difA + 0.00000001f * (a->getMovement()-b->getMovement());
+    if(difA.x * difA.x + difA.y * difA.y < newdifA.x * newdifA.x + newdifA.y * newdifA.y) // Objects moving away from each other
         return;
 
     float dotA = (movA.x - movB.x) * (boundA.getPosition().x - boundB.getPosition().x) +
@@ -81,10 +83,6 @@ void CollisionManager::Sector::applyCircleCircle(CollisionObject* a, CollisionOb
 
     a->setMovement(movA);
     b->setMovement(movB);
-
-    // Move both a frame, so objects dont stick inside another
-    a->move(movA * fTime);
-    b->move(movB * fTime);
 }
 
 int CollisionManager::init(sf::FloatRect bounds)
@@ -96,14 +94,14 @@ int CollisionManager::init(sf::FloatRect bounds)
     sf::Vector2f sectorSize(m_bounds.width / static_cast<float>(xResolution), m_bounds.height / static_cast<float>(yResolution));
     m_sectors.clear();
     m_objects.clear();
-    m_sectors.reserve(xResolution);
+    m_sectors.reserve(xResolution*yResolution);
     for(int x=0; x!=xResolution; x++)
     {
-        m_sectors.emplace_back();
         for(int y=0; y!=yResolution; y++)
         {
-            m_sectors.back().emplace_back(sf::FloatRect(sf::Vector2f(sectorSize.x * static_cast<float>(x), sectorSize.y * static_cast<float>(y)),
-                                                        sf::Vector2f(sectorSize.x * static_cast<float>(x+1), sectorSize.y * static_cast<float>(y+1))));
+            m_sectors.emplace_back(sf::FloatRect(sf::Vector2f(m_bounds.left + sectorSize.x * static_cast<float>(x),
+                                                              m_bounds.top + sectorSize.y * static_cast<float>(y)),
+                                                 sectorSize));
         }
     }
 
@@ -116,6 +114,12 @@ void CollisionManager::exit()
 {
     m_sectors.clear();
     m_objects.clear();
+}
+
+int CollisionManager::test()
+{
+try{return m_sectors.front().getObjects().size();}
+catch(...){return -1;}
 }
 
 void CollisionManager::update(float fTime)
@@ -148,40 +152,31 @@ void CollisionManager::addObject(CollisionObject* object)
 void CollisionManager::removeObject(CollisionObject* object)
 {
     m_objects.remove(object);
-    for(auto x : m_sectors)
+    for(auto& i : m_sectors)
     {
-        for(auto y : x)
-        {
-            y.removeObject(object);
-        }
+        i.removeObject(object);
     }
     m_updateStatus = 0;
 }
 
 void CollisionManager::checkCollisions(float fTime)
 {
-    for(auto x : m_sectors)
+    for(auto& i : m_sectors)
     {
-        for(auto y : x)
-        {
-            y.checkCollisions(fTime);
-        }
+        i.checkCollisions(fTime);
     }
 }
 
 void CollisionManager::refresh()
 {
-    for(auto x : m_sectors)
+    for(auto& i : m_sectors)
     {
-        for(auto y : x)
+        i.reset();
+        for(auto obj : m_objects)
         {
-            y.reset();
-            for(auto obj : m_objects)
+            if(i.getBounds().intersects(obj->getBoundingBox()))
             {
-                if(y.getBounds().intersects(obj->getBoundingBox()))
-                {
-                    y.addObject(obj);
-                }
+                i.addObject(obj);
             }
         }
     }
