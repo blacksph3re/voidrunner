@@ -22,4 +22,21 @@ public:
     const Circle& operator = (const Circle &rhs) {m_pos = rhs.m_pos; m_radius=rhs.m_radius; return *this;}
 };
 
+template<typename T>
+sf::Rect<T> expandToSquare(sf::Rect<T> input)
+{
+    T dif = input.width - input.height;
+    if(div < 0) // Scale up width
+    {
+        input.width -= dif;
+        input.left += dif / static_cast<T>(2);
+    }
+    else if(div > 0) // Scale up height
+    {
+        input.height += dif;
+        input.top += dif / static_cast<T>(2);
+    }
+    return input;
+}
+
 #endif // DEFINITIONS_HPP_INCLUDED

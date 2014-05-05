@@ -23,4 +23,4 @@ void Asteroid::update(float fTime)
     rotate(m_rotation * fTime);
 }
 
-void exit() {}
+void Asteroid::exit() {}

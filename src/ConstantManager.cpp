@@ -1,4 +1,5 @@
 #include "../h/../h/ConstantManager.hpp"
+#include <iostream>
 
 ConstantManager& ConstantManager::get()
 {
@@ -16,8 +17,8 @@ void ConstantManager::setDefaults()
     m_constants.clear();
 
     // Collision-Manager
-    m_constants["CollisionGridResolutionX"] = "3";
-    m_constants["CollisionGridResolutionY"] = "3";
+    m_constants["CollisionGridResolutionX"] = "8";
+    m_constants["CollisionGridResolutionY"] = "8";
     m_constants["CollisionGridResetDelay"] = "2";
 
     // Space
@@ -31,6 +32,8 @@ void ConstantManager::setDefaults()
 
     // General
     m_constants["ImageFolder"] = "res/";
+    m_constants["MenuViewWidth"] = "1600";
+    m_constants["MenuViewHeight"] = "1200";
 
     // Asteroid
     m_constants["AsteroidMinScale"] = "0.005";
@@ -49,7 +52,10 @@ std::string ConstantManager::getValue(std::string key)
 {
     auto it = m_constants.find(key);
     if(it == m_constants.end())
+    {
+        std::cout << "[ConstantManager] Invalid constant requested, code propably won't run as expected" << std::endl;
         return "";
+    }
     else
         return it->second;
 }

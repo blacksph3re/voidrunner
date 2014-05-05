@@ -5,6 +5,7 @@
 #ifndef COLLISIONMANAGER_HPP_INCLUDED
 #define COLLISIONMANAGER_HPP_INCLUDED
 
+#include <SFML/System/NonCopyable.hpp>
 #include <list>
 #include <vector>
 #include "CollisionObject.hpp"
@@ -56,7 +57,6 @@ public:
 
     int init(sf::FloatRect bounds);
     void update(float fTime);
-    void renderBounds(sf::RenderTarget &screen);
     void renderGrid(sf::RenderTarget &screen);
     void exit();
 

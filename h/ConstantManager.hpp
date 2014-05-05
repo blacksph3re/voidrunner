@@ -3,15 +3,15 @@
 
 #include <string>
 #include <map>
+#include <SFML/System/NonCopyable.hpp>
 
-class ConstantManager
+class ConstantManager : public sf::NonCopyable
 {
 private:
     std::map<std::string, std::string> m_constants;
 
     void setDefaults();
     ConstantManager() {setDefaults();}
-    ConstantManager(const ConstantManager& rhs) {}
 public:
     static ConstantManager& get();
     int init();

@@ -68,7 +68,8 @@ int Main::init()
         return retval;
 
     m_screen.create(sf::VideoMode(800, 600), "Voidrunner");
-    m_screen.setView(sf::View(sf::FloatRect(-1200, -1200, 2400, 2400)));
+    m_menuView = sf::View(sf::FloatRect(0, 0, std::stof(getConstant("MenuViewWidth")), std::stof(getConstant("MenuViewHeight"))));
+    m_ingameView = sf::View(sf::FloatRect(-1200, -1200, 2400, 2400));
     return 0;
 }
 
@@ -86,7 +87,9 @@ void Main::update(float fTime)
 void Main::render()
 {
     m_screen.clear();
+    m_screen.setView(m_ingameView);
     m_space.render(m_screen);
+    m_screen.setView(m_menuView);
     m_screen.display();
 }
 

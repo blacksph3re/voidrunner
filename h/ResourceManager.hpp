@@ -5,14 +5,13 @@
 #include <map>
 #include <string>
 
-class ResourceManager
+class ResourceManager : public sf::NonCopyable
 {
 private:
     std::map<std::string, sf::Texture>  m_textures;
     sf::Texture                         m_failTexture;
 
     ResourceManager() {}
-    ResourceManager(const ResourceManager& rhs) {}
 public:
     static ResourceManager& get();
 

@@ -62,7 +62,7 @@ void CollisionManager::Sector::applyCircleCircle(CollisionObject* a, CollisionOb
     sf::Vector2f difB = boundB.getPosition() - boundA.getPosition();
     if(difA.x * difA.x + difA.y * difA.y > (boundA.getRadius() + boundB.getRadius()) * (boundA.getRadius() + boundB.getRadius()))  // No Collision
         return;
-    sf::Vector2f newdifA = difA + 0.00000001f * (a->getMovement()-b->getMovement());
+    sf::Vector2f newdifA = difA + 0.0001f * (a->getMovement()-b->getMovement());
     if(difA.x * difA.x + difA.y * difA.y < newdifA.x * newdifA.x + newdifA.y * newdifA.y) // Objects moving away from each other
         return;
 
@@ -135,12 +135,18 @@ void CollisionManager::update(float fTime)
     checkCollisions(fTime);
 }
 
-void CollisionManager::renderBounds(sf::RenderTarget &screen)
-{
-}
-
 void CollisionManager::renderGrid(sf::RenderTarget &screen)
 {
+    sf::RectangleShape shape;
+    shape.setOutlineThickness(3.0f);
+    shape.setOutlineColor(sf::Color::Red);
+    shape.setFillColor(sf::Color::Transparent);
+    for(auto& i : m_sectors)
+    {
+        shape.setPosition(i.getBounds().left, i.getBounds().top);
+        shape.setSize(sf::Vector2f(i.getBounds().width, i.getBounds().height));
+        screen.draw(shape);
+    }
 }
 
 void CollisionManager::addObject(CollisionObject* object)
