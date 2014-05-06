@@ -39,7 +39,7 @@ void ConstantManager::setDefaults()
     m_constants["AsteroidMinScale"] = "0.005";
     m_constants["AsteroidMaxScale"] = "0.07";
     m_constants["AsteroidMaxSpeed"] = "500";
-    m_constants["AsteroidCount"] = "100";
+    m_constants["AsteroidCount"] = "10";
 }
 
 int ConstantManager::init()
