@@ -22,12 +22,21 @@ int ResourceManager::init()
     }
     m_textures["Asteroid"].setSmooth(true);
 
+
+    if(!m_failFont.loadFromFile(imagefldr + "Default.ttf"))
+    {
+        std::cerr << "[ResourceManager] Could not load default font" << std::endl;
+        exit();
+        return 1;
+    }
+
     return 0;
 }
 
 void ResourceManager::exit()
 {
     m_textures.clear();
+    m_fonts.clear();
 }
 
 const sf::Texture& ResourceManager::getTexture(std::string key)
@@ -37,6 +46,19 @@ const sf::Texture& ResourceManager::getTexture(std::string key)
     {
         std::cerr << "[Resource-Manager] Invalid texture-key: " << key << std::endl;
         return m_failTexture;
+    }
+    return it->second;
+}
+
+const sf::Font& ResourceManager::getFont(std::string key)
+{
+    if(key == "default" || key == "Default")
+        return m_failFont;
+    auto it = m_fonts.find(key);
+    if(it == m_fonts.end())
+    {
+        std::cerr << "[Resource-Manager] Invalid font-key: " << key << std::endl;
+        return m_failFont;
     }
     return it->second;
 }

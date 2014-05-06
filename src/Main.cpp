@@ -63,7 +63,11 @@ int Main::init()
     if(retval != 0)
         return retval;
 
-    retval += m_space.init();
+    retval = m_space.init();
+    if(retval != 0)
+        return retval;
+
+    retval = m_ingameMenu.init();
     if(retval != 0)
         return retval;
 
@@ -76,12 +80,14 @@ int Main::init()
 void Main::exit()
 {
     m_space.exit();
+    m_ingameMenu.exit();
     ResourceManager::get().exit();
 }
 
 void Main::update(float fTime)
 {
     m_space.update(fTime);
+    m_ingameMenu.update(fTime);
 }
 
 void Main::render()
@@ -90,6 +96,7 @@ void Main::render()
     m_screen.setView(m_ingameView);
     m_space.render(m_screen);
     m_screen.setView(m_menuView);
+    m_ingameMenu.render(m_screen);
     m_screen.display();
 }
 

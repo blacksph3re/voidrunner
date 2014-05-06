@@ -3,13 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 #include "Space.hpp"
+#include "IngameMenu.hpp"
 
 class Main : public sf::NonCopyable
 {
 private:
     sf::RenderWindow    m_screen;
     bool                m_running;
+
     Space               m_space;
+    IngameMenu          m_ingameMenu;
+
     sf::View            m_ingameView;
     sf::View            m_menuView;
 

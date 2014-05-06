@@ -61,7 +61,7 @@ void ActiveSystem::render(sf::RenderTarget& screen)
     {
         screen.draw(i);
     }
-    //m_collisionMgr.renderGrid(screen);
+    m_collisionMgr.renderGrid(screen);
 }
 
 void ActiveSystem::exit()

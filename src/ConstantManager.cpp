@@ -17,8 +17,8 @@ void ConstantManager::setDefaults()
     m_constants.clear();
 
     // Collision-Manager
-    m_constants["CollisionGridResolutionX"] = "8";
-    m_constants["CollisionGridResolutionY"] = "8";
+    m_constants["CollisionGridResolutionX"] = "4";
+    m_constants["CollisionGridResolutionY"] = "4";
     m_constants["CollisionGridResetDelay"] = "2";
 
     // Space

@@ -11,11 +11,15 @@ private:
     std::map<std::string, sf::Texture>  m_textures;
     sf::Texture                         m_failTexture;
 
+    std::map<std::string, sf::Font>     m_fonts;
+    sf::Font                            m_failFont;
+
     ResourceManager() {}
 public:
     static ResourceManager& get();
 
     const sf::Texture& getTexture(std::string key);
+    const sf::Font& getFont(std::string key);
 
     int init();
     void exit();
