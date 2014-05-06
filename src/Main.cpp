@@ -40,6 +40,8 @@ void Main::run()
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 m_screen.close();
+            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+                m_screen.close();
         }
 
         render();
@@ -79,6 +81,7 @@ int Main::init()
 
 void Main::exit()
 {
+    m_screen.close();
     m_space.exit();
     m_ingameMenu.exit();
     ResourceManager::get().exit();

@@ -17,8 +17,8 @@ void ConstantManager::setDefaults()
     m_constants.clear();
 
     // Collision-Manager
-    m_constants["CollisionGridResolutionX"] = "4";
-    m_constants["CollisionGridResolutionY"] = "4";
+    m_constants["CollisionGridResolutionX"] = "2";
+    m_constants["CollisionGridResolutionY"] = "2";
     m_constants["CollisionGridResetDelay"] = "2";
 
     // Space
@@ -36,8 +36,8 @@ void ConstantManager::setDefaults()
     m_constants["MenuViewHeight"] = "1200";
 
     // Asteroid
-    m_constants["AsteroidMinScale"] = "0.005";
-    m_constants["AsteroidMaxScale"] = "0.07";
+    m_constants["AsteroidMinScale"] = "0.05";
+    m_constants["AsteroidMaxScale"] = "0.7";
     m_constants["AsteroidMaxSpeed"] = "500";
     m_constants["AsteroidCount"] = "10";
 }
