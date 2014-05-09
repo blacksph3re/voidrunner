@@ -35,6 +35,9 @@ void ConstantManager::setDefaults()
     m_constants["MenuViewWidth"] = "1600";
     m_constants["MenuViewHeight"] = "1200";
 
+    // Physics
+    m_constants["Drag"] = "0.9";
+
     // Asteroid
     m_constants["AsteroidMinScale"] = "0.05";
     m_constants["AsteroidMaxScale"] = "0.7";
