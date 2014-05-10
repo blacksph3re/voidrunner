@@ -1,4 +1,4 @@
-#include "../h/../h/ResourceManager.hpp"
+#include "../h/ResourceManager.hpp"
 #include "../h/ConstantManager.hpp"
 #include <iostream>
 
@@ -20,7 +20,20 @@ int ResourceManager::init()
         exit();
         return 1;
     }
+    else {
+        std::cerr << "[ResourceManager] Loaded Asteroid file" << std::endl;
+    }
     m_textures["Asteroid"].setSmooth(true);
+
+    if(!m_textures["Spaceship"].loadFromFile(imagefldr + "ship1.png"))
+    {
+        std::cerr << "[ResourceManager] Could not load Spaceship file" << std::endl;
+        exit();
+        return 1;
+    } else {
+        std::cerr << "[ResourceManager] Loaded Spaceship file" << std::endl;
+    }
+    m_textures["Spaceship"].setSmooth(true);
 
 
     if(!m_failFont.loadFromFile(imagefldr + "Default.ttf"))

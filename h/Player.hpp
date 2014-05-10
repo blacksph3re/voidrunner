@@ -9,9 +9,10 @@ class Player
         Spaceship m_spaceship = Spaceship();
 
     public:
-        void init();
+        int init();
         void update(float fTime);
         void handle_event(sf::Event event);
+        void render(sf::RenderWindow& screen);
 
         Spaceship getSpaceship() {return m_spaceship;}
 

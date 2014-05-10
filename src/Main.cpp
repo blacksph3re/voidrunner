@@ -42,6 +42,7 @@ void Main::run()
                 m_screen.close();
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 m_screen.close();
+            m_player.handle_event(event);
         }
 
         render();
@@ -73,7 +74,11 @@ int Main::init()
     if(retval != 0)
         return retval;
 
-    m_screen.create(sf::VideoMode(800, 600), "Voidrunner");
+    retval = m_player.init();
+    if (retval != 0)
+        return retval;
+
+    m_screen.create(sf::VideoMode(1920, 1080), "Voidrunner");
     m_menuView = sf::View(sf::FloatRect(0, 0, std::stof(getConstant("MenuViewWidth")), std::stof(getConstant("MenuViewHeight"))));
     m_ingameView = sf::View(sf::FloatRect(-1200, -1200, 2400, 2400));
     return 0;
@@ -91,6 +96,7 @@ void Main::update(float fTime)
 {
     m_space.update(fTime);
     m_ingameMenu.update(fTime);
+    m_player.update(fTime);
 }
 
 void Main::render()
@@ -98,6 +104,7 @@ void Main::render()
     m_screen.clear();
     m_screen.setView(m_ingameView);
     m_space.render(m_screen);
+    m_player.render(m_screen);
     m_screen.setView(m_menuView);
     m_ingameMenu.render(m_screen);
     m_screen.display();

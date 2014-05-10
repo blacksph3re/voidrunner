@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Space.hpp"
 #include "IngameMenu.hpp"
+#include "Player.hpp"
 
 class Main : public sf::NonCopyable
 {
@@ -13,6 +14,7 @@ private:
 
     Space               m_space;
     IngameMenu          m_ingameMenu;
+    Player              m_player;
 
     sf::View            m_ingameView;
     sf::View            m_menuView;
