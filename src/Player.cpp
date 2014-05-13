@@ -1,10 +1,9 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "../h/Player.hpp"
 
 int Player::init() {
-    int retval;
-
-    return retval = m_spaceship.init();
+    return m_spaceship.init();
 }
 
 void Player::update(float fTime) {
@@ -17,6 +16,8 @@ void Player::render(sf::RenderWindow& screen) {
 
 void Player::handle_event(sf::Event event) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        m_spaceship.setMoveTarget(sf::Vector2f(sf::Mouse::getPosition()));
+        sf::Vector2f mouse_pos = sf::Vector2f( sf::Mouse::getPosition() );
+        getSpaceship().setMoveTarget( mouse_pos );
+        std::cout << "mouse_pos: " << mouse_pos.x << " " << mouse_pos.y << "\n";
     }
 }

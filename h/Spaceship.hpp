@@ -17,7 +17,7 @@ class Spaceship : public CollisionObject
         void setAcceleration(sf::Vector2f val) {m_acceleration = val;}
         sf::Vector2f getAcceleration() {return m_acceleration;}
 
-        void setMoveTarget(sf::Vector2f move_target) {m_move_target = move_target;}
+        void setMoveTarget(sf::Vector2f val) {m_move_target = val;}
         sf::Vector2f getMoveTarget() {return m_move_target;}
 
         int init();
