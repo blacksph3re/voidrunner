@@ -23,14 +23,16 @@ private:
     void update(float fTime);
     void render();
     void exit();
+
+    Main();
+    ~Main();
 public:
     void run(); // to be called only by main()
 
     sf::Vector2f getIngameCursor();
     sf::Vector2f getMenuCursor();
 
-    Main();
-    ~Main();
+    static Main& get();
 };
 
 #endif // MAIN_HPP_INCLUDED

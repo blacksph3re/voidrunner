@@ -9,9 +9,14 @@
 int main()
 {
     srand (static_cast <unsigned> (time(0)));
-    Main m;
-    m.run();
+    Main::get().run();
     return 0;
+}
+
+Main& Main::get()
+{
+    static Main instance;
+    return instance;
 }
 
 Main::Main()
