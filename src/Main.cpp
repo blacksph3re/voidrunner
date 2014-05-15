@@ -110,3 +110,12 @@ void Main::render()
     m_screen.display();
 }
 
+sf::Vector2f Main::getIngameCursor()
+{
+    return m_screen.mapPixelToCoords(sf::Mouse::getPosition(m_screen), m_ingameView);
+}
+
+sf::Vector2f Main::getMenuCursor()
+{
+    return m_screen.mapPixelToCoords(sf::Mouse::getPosition(m_screen), m_menuView);
+}

@@ -26,6 +26,9 @@ private:
 public:
     void run(); // to be called only by main()
 
+    sf::Vector2f getIngameCursor();
+    sf::Vector2f getMenuCursor();
+
     Main();
     ~Main();
 };
