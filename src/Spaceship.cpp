@@ -13,7 +13,8 @@ int Spaceship::init()
     setMoveTarget( getPosition() );
     setMass(1);
     setMovement(sf::Vector2f(0, 0));
-    setAcceleration(sf::Vector2f(100, 100));
+    setAcceleration(sf::Vector2f(0, 0));
+    setMaxAcceleration(50);
 
     std::cout << "pos: " << getPosition().x << getPosition().y
               << "move: " << getMovement().x << getMovement().y
@@ -25,28 +26,23 @@ int Spaceship::init()
 
 void Spaceship::update(float fTime)
 {
-    setAcceleration(
-        VectorCalculator::get().setLength2f(
-            getMoveTarget() - getPosition() ,
-            VectorCalculator::get().length2f( getAcceleration() )
-        )
-    );
+    if ( getPosition().x != getMoveTarget().x || getPosition().y != getMoveTarget().y ) {
+        if ( fTime * fTime != 0 ) {
+            setAcceleration( ( getMoveTarget() - getPosition() - getMovement() * fTime ) / ( fTime * fTime ) );
+        } else {
+            std::cout << "frame-time square = 0" << "\n";
+        }
+        if ( VectorCalculator::get().length( getAcceleration() ) > getMaxAcceleration() )
+            setAcceleration( VectorCalculator::get().setLength( getAcceleration(), getMaxAcceleration() ) );
 
     setMovement(getAcceleration() * fTime + getMovement() * std::stof(getConstant("Drag")));
 
     move(getMovement() * fTime);
+    }
 
     std::cout << "[Spaceship] Pos: " << getPosition().x << " " << getPosition().y
               << " Tar: " << getMoveTarget().x << " " << getMoveTarget().y
               << " Move: " << getMovement().x << " " << getMovement().y
               << " Acc: " << getAcceleration().x << " " << getAcceleration().y
               << "\n";
-
-    /*
-    near to move_target:
-        get slower
-    else:
-        move faster
-        (max speed through drag)
-    */
 }

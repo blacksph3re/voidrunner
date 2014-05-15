@@ -9,6 +9,8 @@ class Spaceship : public CollisionObject
         sf::Vector2f m_acceleration;
         sf::Vector2f m_move_target;
 
+        float m_max_acceleration;
+
         Weapon m_weapon;
     public:
         CollisionObject::Shapes getShape() {return CIRCLE;}
@@ -19,6 +21,9 @@ class Spaceship : public CollisionObject
 
         void setMoveTarget(sf::Vector2f val) {m_move_target = val;}
         sf::Vector2f getMoveTarget() {return m_move_target;}
+
+        void setMaxAcceleration(float val) {m_max_acceleration = val;}
+        float getMaxAcceleration() {return m_max_acceleration;}
 
         int init();
         void update(float fTime);

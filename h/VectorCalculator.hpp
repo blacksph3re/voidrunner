@@ -11,8 +11,8 @@ class VectorCalculator : sf::NonCopyable
     public:
         static VectorCalculator& get();
 
-        float length2f(sf::Vector2f vec);
-        sf::Vector2f setLength2f(sf::Vector2f vec, float len);
+        float length(sf::Vector2f vec);
+        sf::Vector2f setLength(sf::Vector2f vec, float len);
 
         VectorCalculator() {};
         ~VectorCalculator() {};

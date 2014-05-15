@@ -6,7 +6,7 @@
 class Player
 {
     private:
-        Spaceship m_spaceship = Spaceship();
+        Spaceship m_spaceship;
 
     public:
         int init();
@@ -14,6 +14,7 @@ class Player
         void handle_event(sf::Event event);
         void render(sf::RenderWindow& screen);
 
+        void setSpaceship(Spaceship val) {m_spaceship = val;}
         Spaceship getSpaceship() {return m_spaceship;}
 
         Player() {};
