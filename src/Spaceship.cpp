@@ -22,6 +22,7 @@ int Spaceship::init()
               << "\n";
 
     return 0;
+    // Eine Änderung von Marcel
 }
 
 void Spaceship::update(float fTime)
