@@ -18,12 +18,11 @@ void Player::update(float fTime) {
         getSpaceship().setAcceleration( sf::Vector2f( 0, 0 ) );
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        getSpaceship().setAcceleration( VectorCalculator::rotateVector( getSpaceship().getAcceleration(), -2 ) );
+        getSpaceship().setDirection( VectorCalculator::rotateVector( getSpaceship().getDirection(), -1 ) );
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        getSpaceship().setAcceleration( VectorCalculator::rotateVector( getSpaceship().getAcceleration(), 2 ) );
+        getSpaceship().setDirection( VectorCalculator::rotateVector( getSpaceship().getDirection(), 1 ) );
     }
-
 
     getSpaceship().update(fTime);
 }

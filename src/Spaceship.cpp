@@ -28,8 +28,9 @@ void Spaceship::update(float fTime)
 {
     setMovement(getAcceleration() * fTime + getMovement() * std::stof(getConstant("Drag")));
 
-    setDirection( getAcceleration() );
-    setRotation( VectorCalculator::VectorToRoationDeg( getDirection() ) );
+    setRotation( VectorCalculator::VectorToRoationDeg( getMovement() ) );
+
+    std::cout << "rotation: " << getRotation() << " " << getDirection().x << " " << getDirection().y << "\n";
 
     move(getMovement() * fTime);
 
