@@ -28,7 +28,7 @@ void Spaceship::update(float fTime)
 {
     if ( getPosition().x != getMoveTarget().x || getPosition().y != getMoveTarget().y ) {
         if ( fTime * fTime != 0 ) {
-            setAcceleration( ( getMoveTarget() - getPosition() - getMovement() * fTime ) / ( fTime * fTime ) );
+            setAcceleration( 2.0f * ( getMoveTarget() - getPosition() - getMovement() * fTime ) / ( fTime * fTime ) );
         } else {
             std::cout << "frame-time square = 0" << "\n";
         }
