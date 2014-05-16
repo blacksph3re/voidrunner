@@ -9,7 +9,11 @@ namespace VectorCalculator {
     float length(sf::Vector2f vec);
     sf::Vector2f setLength(sf::Vector2f vec, float len);
 
-    sf::Vector2f rotateVector(sf::Vector2f vec, float angle);
+    float RadToDeg(float rad);
+    float DegToRad(float deg);
+
+    sf::Vector2f rotateVectorRad(sf::Vector2f vec, float angle);
+    sf::Vector2f rotateVectorDeg(sf::Vector2f vec, float angle);
 
     float VectorToRoationDeg( sf::Vector2f vec );
     sf::Vector2f RotationDegToVector( float rot );

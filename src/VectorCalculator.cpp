@@ -20,12 +20,25 @@ namespace VectorCalculator {
         }
     }
 
-    sf::Vector2f rotateVector(sf::Vector2f vec, float angle) {
+    float DegToRad(float deg) {
+        return deg / 180 * M_PI;
+    }
+
+    float RadToDeg(float rad) {
+        return rad / M_PI * 180;
+    }
+
+    sf::Vector2f rotateVectorRad(sf::Vector2f vec, float angle) {
+        return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+    }
+
+    sf::Vector2f rotateVectorDeg(sf::Vector2f vec, float angle) {
+        angle = RadToDeg( angle );
         return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
     }
 
     float VectorToRoationDeg( sf::Vector2f vec ) {
-        return ( atan2( vec.y, vec.x ) - atan2( 0, -1 ) ) / 180.0f * M_PI;
+        return  RadToDeg( ( atan2( vec.y, vec.x ) - atan2( 0, -1 ) ) );
     }
 
     sf::Vector2f RotationDegToVector( float rot ) {
