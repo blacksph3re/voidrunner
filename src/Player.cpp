@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "../h/Main.hpp"
 #include "../h/Player.hpp"
+#include "../h/VectorCalculator.hpp"
 
 int Player::init() {
     setSpaceship( Spaceship() );
@@ -9,7 +10,22 @@ int Player::init() {
 }
 
 void Player::update(float fTime) {
-    m_spaceship.update(fTime);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        getSpaceship().setAcceleration( VectorCalculator::setLength( getSpaceship().getDirection() , getSpaceship().getMaxAcceleration() ) );
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        getSpaceship().setAcceleration( VectorCalculator::setLength( getSpaceship().getDirection() , - getSpaceship().getMaxAcceleration() ) );
+    } else {
+        getSpaceship().setAcceleration( sf::Vector2f( 0, 0 ) );
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        getSpaceship().setAcceleration( VectorCalculator::rotateVector( getSpaceship().getAcceleration(), -2 ) );
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        getSpaceship().setAcceleration( VectorCalculator::rotateVector( getSpaceship().getAcceleration(), 2 ) );
+    }
+
+
+    getSpaceship().update(fTime);
 }
 
 void Player::render(sf::RenderWindow& screen) {
@@ -17,9 +33,4 @@ void Player::render(sf::RenderWindow& screen) {
 }
 
 void Player::handle_event(sf::Event event) {
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        sf::Vector2f mouse_pos = Main::get().getIngameCursor();
-        m_spaceship.setMoveTarget( mouse_pos );
-        std::cout << "mouse_pos: " << mouse_pos.x << " " << mouse_pos.y << "\n";
-    }
 }

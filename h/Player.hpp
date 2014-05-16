@@ -15,7 +15,7 @@ class Player
         void render(sf::RenderWindow& screen);
 
         void setSpaceship(Spaceship val) {m_spaceship = val;}
-        Spaceship getSpaceship() {return m_spaceship;}
+        Spaceship &getSpaceship() {return m_spaceship;}
 
         Player() {};
         ~Player() {};

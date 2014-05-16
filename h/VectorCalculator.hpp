@@ -4,19 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
-class VectorCalculator : sf::NonCopyable
-{
-    private:
+namespace VectorCalculator {
 
-    public:
-        static VectorCalculator& get();
+    float length(sf::Vector2f vec);
+    sf::Vector2f setLength(sf::Vector2f vec, float len);
 
-        float length(sf::Vector2f vec);
-        sf::Vector2f setLength(sf::Vector2f vec, float len);
+    sf::Vector2f rotateVector(sf::Vector2f vec, float angle);
 
-        VectorCalculator() {};
-        ~VectorCalculator() {};
-    protected:
+    float VectorToRoationDeg( sf::Vector2f vec );
+    sf::Vector2f RotationDegToVector( float rot );
+
 };
 
 #endif // VECTORCALCULATOR_H
