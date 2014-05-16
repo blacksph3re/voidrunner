@@ -40,9 +40,11 @@ void Spaceship::update(float fTime)
     move(getMovement() * fTime);
     }
 
+    /*
     std::cout << "[Spaceship] Pos: " << getPosition().x << " " << getPosition().y
               << " Tar: " << getMoveTarget().x << " " << getMoveTarget().y
               << " Move: " << getMovement().x << " " << getMovement().y
               << " Acc: " << getAcceleration().x << " " << getAcceleration().y
               << "\n";
+    */
 }
