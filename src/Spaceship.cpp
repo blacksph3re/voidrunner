@@ -26,33 +26,24 @@ int Spaceship::init() {
 }
 
 void Spaceship::update(float fTime) {
-    setMovement(getAcceleration() * fTime + getMovement() * std::stof(getConstant("Drag")));
-
-    rotate( getTurnAngle() * getRotationDirection() * fTime );
-
+    setMovement( getMovement() * std::stof(getConstant("Drag")) );
     move(getMovement() * fTime);
 }
 
-void Spaceship::turnLeft() {
-    setRotationDirection( -1.0f );
+void Spaceship::turnLeft( float fTime ) {
+    rotate( - getTurnAngle() * fTime );
 }
 
-void Spaceship::turnRight() {
-    setRotationDirection( 1.0f );
+void Spaceship::turnRight( float fTime ) {
+    rotate( getTurnAngle() * fTime );
 }
 
-void Spaceship::stopTurning() {
-    setRotationDirection( 0.0f );
+void Spaceship::accelerateForward( float fTime ) {
+    sf::Vector2f acceleration = VectorCalculator::setLength( VectorCalculator::AngleDegToVector( getRotation() ) , getMaxAcceleration() * fTime );
+    setMovement( getMovement() + acceleration );
 }
 
-void Spaceship::accelerateForward() {
-    setAcceleration( VectorCalculator::setLength( VectorCalculator::AngleDegToVector( getRotation() ) , getMaxAcceleration() ) );
-}
-
-void Spaceship::accelerateBack() {
-    setAcceleration( - VectorCalculator::setLength( - VectorCalculator::AngleDegToVector( getRotation() ) , getMaxAcceleration() ) );
-}
-
-void Spaceship::stopAcceleration() {
-    setAcceleration( sf::Vector2f( 0, 0 ) );
+void Spaceship::accelerateBack( float fTime ) {
+    sf::Vector2f acceleration = VectorCalculator::setLength( VectorCalculator::AngleDegToVector( getRotation() ) , getMaxAcceleration() * fTime );
+    setMovement( getMovement() - acceleration );
 }

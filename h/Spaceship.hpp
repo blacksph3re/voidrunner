@@ -15,12 +15,10 @@ class Spaceship : public CollisionObject
 
         Weapon m_weapon;
     public:
-        void turnLeft();
-        void turnRight();
-        void stopTurning();
-        void accelerateForward();
-        void accelerateBack();
-        void stopAcceleration();
+        void turnLeft(float fTime);
+        void turnRight(float fTime);
+        void accelerateForward(float fTime);
+        void accelerateBack(float fTime);
 
 
         CollisionObject::Shapes getShape() {return CIRCLE;}

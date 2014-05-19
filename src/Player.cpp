@@ -11,18 +11,16 @@ int Player::init() {
 
 void Player::update(float fTime) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        getSpaceship().accelerateForward();
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        getSpaceship().accelerateBack();
-    } else {
-        getSpaceship().stopAcceleration();
+        getSpaceship().accelerateForward( fTime );
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        getSpaceship().accelerateBack( fTime );
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        getSpaceship().turnLeft();
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        getSpaceship().turnRight();
-    } else {
-        getSpaceship().stopTurning();
+        getSpaceship().turnLeft( fTime );
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        getSpaceship().turnRight( fTime );
     }
 
     getSpaceship().update(fTime);
