@@ -12,9 +12,10 @@ int Player::init() {
 void Player::update(float fTime) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         getSpaceship().accelerateForward();
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
         getSpaceship().accelerateBack();
+    } else {
+        getSpaceship().stopAcceleration();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         getSpaceship().turnLeft();

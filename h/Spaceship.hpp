@@ -17,6 +17,7 @@ class Spaceship : public CollisionObject
         void turnRight();
         void accelerateForward();
         void accelerateBack();
+        void stopAcceleration();
 
 
         CollisionObject::Shapes getShape() {return CIRCLE;}

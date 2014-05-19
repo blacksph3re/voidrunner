@@ -13,7 +13,7 @@ int Spaceship::init() {
     setMass( 1 );
     setMovement( sf::Vector2f(0, 0) );
     setAcceleration( sf::Vector2f(0, 0) );
-    setMaxAcceleration( 50 );
+    setMaxAcceleration( 30 );
 
     std::cout << "pos: " << getPosition().x << getPosition().y
               << "move: " << getMovement().x << getMovement().y
@@ -47,4 +47,8 @@ void Spaceship::accelerateForward() {
 
 void Spaceship::accelerateBack() {
     setAcceleration( - VectorCalculator::setLength( getDirection() , getMaxAcceleration() ) );
+}
+
+void Spaceship::stopAcceleration() {
+    setAcceleration( VectorCalculator::setLength( getAcceleration() , 0 ) );
 }
