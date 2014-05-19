@@ -13,6 +13,12 @@ class Spaceship : public CollisionObject
 
         Weapon m_weapon;
     public:
+        void turnLeft();
+        void turnRight();
+        void accelerateForward();
+        void accelerateBack();
+
+
         CollisionObject::Shapes getShape() {return CIRCLE;}
         sf::FloatRect getBoundingBox() const {return getGlobalBounds();}
 

@@ -6,8 +6,7 @@
 #include "../h/VectorCalculator.hpp"
 
 
-int Spaceship::init()
-{
+int Spaceship::init() {
     setTexture( ResourceManager::get().getTexture( "Spaceship" ) );
     setPosition(sf::Vector2f(0, 0) );
     setDirection( sf::Vector2f(0, -1) );
@@ -24,8 +23,7 @@ int Spaceship::init()
     return 0;
 }
 
-void Spaceship::update(float fTime)
-{
+void Spaceship::update(float fTime) {
     setMovement(getAcceleration() * fTime + getMovement() * std::stof(getConstant("Drag")));
 
     setRotation( VectorCalculator::VectorToRoationDeg( getMovement() ) );
@@ -33,11 +31,20 @@ void Spaceship::update(float fTime)
     std::cout << "rotation: " << getRotation() << " " << getDirection().x << " " << getDirection().y << "\n";
 
     move(getMovement() * fTime);
+}
 
-    /*
-    std::cout << "[Spaceship] Pos: " << getPosition().x << " " << getPosition().y
-              << " Move: " << getMovement().x << " " << getMovement().y
-              << " Acc: " << getAcceleration().x << " " << getAcceleration().y
-              << "\n";
-    */
+void Spaceship::turnLeft() {
+    setDirection( VectorCalculator::rotateVectorDeg( getDirection() , -2 ) );
+}
+
+void Spaceship::turnRight() {
+    setDirection( VectorCalculator::rotateVectorDeg( getDirection() , 2 ) );
+}
+
+void Spaceship::accelerateForward() {
+    setAcceleration( VectorCalculator::setLength( getDirection() , getMaxAcceleration() ) );
+}
+
+void Spaceship::accelerateBack() {
+    setAcceleration( - VectorCalculator::setLength( getDirection() , getMaxAcceleration() ) );
 }

@@ -11,17 +11,16 @@ int Player::init() {
 
 void Player::update(float fTime) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        getSpaceship().setAcceleration( VectorCalculator::setLength( getSpaceship().getDirection() , getSpaceship().getMaxAcceleration() ) );
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        getSpaceship().setAcceleration( VectorCalculator::setLength( getSpaceship().getDirection() , - getSpaceship().getMaxAcceleration() ) );
-    } else {
-        getSpaceship().setAcceleration( sf::Vector2f( 0, 0 ) );
+        getSpaceship().accelerateForward();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        getSpaceship().accelerateBack();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        getSpaceship().setDirection( VectorCalculator::rotateVectorDeg( getSpaceship().getDirection(), -1 ) );
+        getSpaceship().turnLeft();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        getSpaceship().setDirection( VectorCalculator::rotateVectorDeg( getSpaceship().getDirection(), 1 ) );
+        getSpaceship().turnRight();
     }
 
     getSpaceship().update(fTime);
