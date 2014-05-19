@@ -16,7 +16,9 @@ namespace VectorCalculator {
     sf::Vector2f rotateVectorDeg(sf::Vector2f vec, float angle);
 
     float VectorToRoationDeg( sf::Vector2f vec );
-    sf::Vector2f RotationDegToVector( float rot );
+    sf::Vector2f AngleDegToVector( float angle );
+
+    float AngleDegBetweenVectors( sf::Vector2f vec1, sf::Vector2f vec2 );
 
 };
 

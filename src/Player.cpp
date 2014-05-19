@@ -19,9 +19,10 @@ void Player::update(float fTime) {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         getSpaceship().turnLeft();
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         getSpaceship().turnRight();
+    } else {
+        getSpaceship().stopTurning();
     }
 
     getSpaceship().update(fTime);

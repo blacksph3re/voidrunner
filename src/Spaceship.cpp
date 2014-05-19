@@ -10,10 +10,12 @@ int Spaceship::init() {
     setTexture( ResourceManager::get().getTexture( "Spaceship" ) );
     setPosition(sf::Vector2f(0, 0) );
     setDirection( sf::Vector2f(0, -1) );
+    setRotationDirection( 0.0f );
     setMass( 1 );
     setMovement( sf::Vector2f(0, 0) );
     setAcceleration( sf::Vector2f(0, 0) );
-    setMaxAcceleration( 30 );
+    setMaxAcceleration( 100 );
+    setTurnAngle( 10 );
 
     std::cout << "pos: " << getPosition().x << getPosition().y
               << "move: " << getMovement().x << getMovement().y
@@ -26,29 +28,31 @@ int Spaceship::init() {
 void Spaceship::update(float fTime) {
     setMovement(getAcceleration() * fTime + getMovement() * std::stof(getConstant("Drag")));
 
-    setRotation( VectorCalculator::VectorToRoationDeg( getMovement() ) );
-
-    std::cout << "rotation: " << getRotation() << " " << getDirection().x << " " << getDirection().y << "\n";
+    rotate( getTurnAngle() * getRotationDirection() * fTime );
 
     move(getMovement() * fTime);
 }
 
 void Spaceship::turnLeft() {
-    setDirection( VectorCalculator::rotateVectorDeg( getDirection() , -2 ) );
+    setRotationDirection( -1.0f );
 }
 
 void Spaceship::turnRight() {
-    setDirection( VectorCalculator::rotateVectorDeg( getDirection() , 2 ) );
+    setRotationDirection( 1.0f );
+}
+
+void Spaceship::stopTurning() {
+    setRotationDirection( 0.0f );
 }
 
 void Spaceship::accelerateForward() {
-    setAcceleration( VectorCalculator::setLength( getDirection() , getMaxAcceleration() ) );
+    setAcceleration( VectorCalculator::setLength( VectorCalculator::AngleDegToVector( getRotation() ) , getMaxAcceleration() ) );
 }
 
 void Spaceship::accelerateBack() {
-    setAcceleration( - VectorCalculator::setLength( getDirection() , getMaxAcceleration() ) );
+    setAcceleration( - VectorCalculator::setLength( - VectorCalculator::AngleDegToVector( getRotation() ) , getMaxAcceleration() ) );
 }
 
 void Spaceship::stopAcceleration() {
-    setAcceleration( VectorCalculator::setLength( getAcceleration() , 0 ) );
+    setAcceleration( sf::Vector2f( 0, 0 ) );
 }

@@ -10,11 +10,14 @@ class Spaceship : public CollisionObject
         sf::Vector2f m_direction;
 
         float m_max_acceleration;
+        float m_rotation_direction;
+        float m_turn_angle;
 
         Weapon m_weapon;
     public:
         void turnLeft();
         void turnRight();
+        void stopTurning();
         void accelerateForward();
         void accelerateBack();
         void stopAcceleration();
@@ -31,6 +34,12 @@ class Spaceship : public CollisionObject
 
         void setMaxAcceleration(float val) {m_max_acceleration = val;}
         float getMaxAcceleration() {return m_max_acceleration;}
+
+        void setRotationDirection(float val) {m_rotation_direction = val;}
+        float getRotationDirection() {return m_rotation_direction;}
+
+        void setTurnAngle(float val) {m_turn_angle = val;}
+        float getTurnAngle() {return m_turn_angle;}
 
         int init();
         void update(float fTime);

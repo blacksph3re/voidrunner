@@ -29,20 +29,33 @@ namespace VectorCalculator {
     }
 
     sf::Vector2f rotateVectorRad(sf::Vector2f vec, float angle) {
-        return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+        if (vec.x == 0 && vec.y == 0) {
+            return sf::Vector2f(0, 0);
+        } else {
+            return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+        }
     }
 
     sf::Vector2f rotateVectorDeg(sf::Vector2f vec, float angle) {
-        angle = RadToDeg( angle );
-        return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+        if (vec.x == 0 && vec.y == 0) {
+            return sf::Vector2f(0, 0);
+        } else {
+            angle = RadToDeg( angle );
+            return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+        }
     }
 
     float VectorToRoationDeg( sf::Vector2f vec ) {
         return  RadToDeg( ( atan2( vec.y, vec.x ) - atan2( 0, -1 ) ) );
     }
 
-    sf::Vector2f RotationDegToVector( float rot ) {
-        return sf::Vector2f(0, 0);
+    sf::Vector2f AngleDegToVector( float angle ) {
+        sf::Vector2f vec = sf::Vector2f( 1 , 0 );
+        return VectorCalculator::rotateVectorDeg( vec , angle );
+    }
+
+    float AngleDegBetweenVectors( sf::Vector2f vec1, sf::Vector2f vec2 ) {
+        return RadToDeg( ( atan2( vec1.y, vec1.x ) - atan2( vec2.y, vec2.x ) ) );
     }
 
 }
