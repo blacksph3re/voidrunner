@@ -6,11 +6,7 @@
 class Spaceship : public CollisionObject
 {
     private:
-        sf::Vector2f m_acceleration;
-        sf::Vector2f m_direction;
-
-        float m_max_acceleration;
-        float m_rotation_direction;
+        float m_acceleration;
         float m_turn_angle;
 
         Weapon m_weapon;
@@ -24,17 +20,8 @@ class Spaceship : public CollisionObject
         CollisionObject::Shapes getShape() {return CIRCLE;}
         sf::FloatRect getBoundingBox() const {return getGlobalBounds();}
 
-        void setAcceleration(sf::Vector2f val) {m_acceleration = val;}
-        sf::Vector2f getAcceleration() {return m_acceleration;}
-
-        void setDirection(sf::Vector2f val) {m_direction = val;}
-        sf::Vector2f getDirection() {return m_direction;}
-
-        void setMaxAcceleration(float val) {m_max_acceleration = val;}
-        float getMaxAcceleration() {return m_max_acceleration;}
-
-        void setRotationDirection(float val) {m_rotation_direction = val;}
-        float getRotationDirection() {return m_rotation_direction;}
+        void setAcceleration(float val) {m_acceleration = val;}
+        float getAcceleration() {return m_acceleration;}
 
         void setTurnAngle(float val) {m_turn_angle = val;}
         float getTurnAngle() {return m_turn_angle;}
