@@ -38,11 +38,13 @@ void Spaceship::turnRight( float fTime ) {
 }
 
 void Spaceship::accelerateForward( float fTime ) {
-    sf::Vector2f acceleration = VectorCalculator::setLength( VectorCalculator::AngleDegToVector( getRotation() ) , getAcceleration() );
+    sf::Vector2f acceleration = VectorCalculator::setLength(
+        VectorCalculator::AngleDegToVector( getRotation() ) , getAcceleration() );
     setMovement( getMovement() + acceleration * fTime );
 }
 
 void Spaceship::accelerateBack( float fTime ) {
-    sf::Vector2f acceleration = VectorCalculator::setLength( VectorCalculator::AngleDegToVector( getRotation() ) , getAcceleration() );
+    sf::Vector2f acceleration = VectorCalculator::setLength(
+        VectorCalculator::AngleDegToVector( getRotation() ) , getAcceleration() );
     setMovement( getMovement() - acceleration * fTime );
 }

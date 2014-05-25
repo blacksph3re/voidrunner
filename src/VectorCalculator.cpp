@@ -12,11 +12,10 @@ namespace VectorCalculator {
     }
 
     sf::Vector2f setLength(sf::Vector2f vec, float len) {
-        sf::Vector2f norm;
         if (vec.x == 0 && vec.y == 0)
-            return norm = sf::Vector2f(len, len);
+            return sf::Vector2f(len, len);
         else {
-            return norm = (vec * len) / VectorCalculator::length(vec);
+            return (vec * len) / VectorCalculator::length(vec);
         }
     }
 
@@ -29,19 +28,16 @@ namespace VectorCalculator {
     }
 
     sf::Vector2f rotateVectorRad(sf::Vector2f vec, float angle) {
-        if (vec.x == 0 && vec.y == 0) {
-            return sf::Vector2f(0, 0);
-        }
-        return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+        angle = angle;
+        return sf::Vector2f(
+            vec.x * cos(angle) - vec.y * sin(angle),
+            vec.x * sin(angle) + vec.y * cos(angle)
+        );
     }
 
     sf::Vector2f rotateVectorDeg(sf::Vector2f vec, float angle) {
-        if (vec.x == 0 && vec.y == 0) {
-            return sf::Vector2f(0, 0);
-        }
-        angle = RadToDeg( angle );
-        angle = -angle;
-        return sf::Vector2f(vec.x * cos(angle) - vec.y * sin(angle), vec.x * sin(angle) + vec.y * cos(angle));
+        angle = DegToRad( angle );
+        return VectorCalculator::rotateVectorRad( vec, angle );
     }
 
     float VectorToRoationDeg( sf::Vector2f vec ) {
